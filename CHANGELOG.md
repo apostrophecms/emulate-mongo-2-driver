@@ -1,3 +1,11 @@
+# CHANGELOG
+
+## UNRELEASED
+
+### Changes
+
+* Replace `mongodb@3` with `@apostrophecms/emulate-mongo-3-driver` with `mongodb@6`.
+
 ## 1.2.3
 
 * Fixed issue that caused `count` to disregard its criteria object in at least some cases.

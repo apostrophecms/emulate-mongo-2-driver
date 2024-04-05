@@ -1,4 +1,4 @@
-const mongodb = require('mongodb');
+const mongodb = require('@apostrophecms/emulate-mongo-3-driver');
 const URL = require('url').URL;
 
 function omit(obj, keys) {
