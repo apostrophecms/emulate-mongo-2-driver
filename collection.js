@@ -87,7 +87,6 @@ module.exports = function (baseClass) {
     //   return super.watch(pipeline, options)[toLegacy]();
     // }
 
-
     // Before this module existed, Apostrophe patched this into
     // the mongodb collection prototype
     findWithProjection(filter, projection) {

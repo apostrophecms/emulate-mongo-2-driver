@@ -9,7 +9,7 @@ const omit = function (obj, keys) {
   });
 
   return n;
-}
+};
 
 module.exports = {
   toTinsel,

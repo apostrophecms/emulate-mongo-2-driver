@@ -45,7 +45,6 @@ for (const [ mongodbExportName, mongodbExportValue ] of entries) {
 // https://github.com/mongodb/node-mongodb-native/blob/master/CHANGES_3.0.0.md#mapreduce-inlined-results (we don't use it)
 // See others on that page
 
-
 // function decorate(obj, mongodbExportName = '') {
 //   class Tinsel extends obj {
 //     _emulated = true
