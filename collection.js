@@ -60,11 +60,11 @@ module.exports = function (baseClass) {
     };
 
     // initializeUnorderedBulkOp(options) {
-    //   return super.initializeUnorderedBulkOp(options)[toLegacy]();
+    //   return super.initializeUnorderedBulkOp(options)[toTinsel]();
     // }
     //
     // initializeOrderedBulkOp(options) {
-    //   return super.initializeOrderedBulkOp(options)[toLegacy]();
+    //   return super.initializeOrderedBulkOp(options)[toTinsel]();
     // }
 
     find(filter, projection) {
@@ -77,11 +77,11 @@ module.exports = function (baseClass) {
     }
 
     // listIndexes(options) {
-    //   return super.listIndexes(options)[toLegacy]();
+    //   return super.listIndexes(options)[toTinsel]();
     // }
     //
     // watch(pipeline, options) {
-    //   return super.watch(pipeline, options)[toLegacy]();
+    //   return super.watch(pipeline, options)[toTinsel]();
     // }
 
     // Before this module existed, Apostrophe patched this into
