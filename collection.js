@@ -21,9 +21,6 @@ module.exports = function (baseClass) {
     }
 
     // conversion APIs
-    // aggregate(pipeline, options) {
-    //   return super.aggregate(pipeline, options)[toLegacy]();
-    // }
     aggregate(op1 /* , op2... */, callback) {
       const last = arguments.length && arguments[arguments.length - 1];
       // Bring back support for operations as a variable number of

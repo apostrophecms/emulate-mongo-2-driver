@@ -7,7 +7,6 @@ module.exports = function (baseClass) {
     }
 
     collection(name, options, callback) {
-      // return super.collection(name, options, callback);
       if (arguments.length === 1) {
         return super.collection(name)[toTinsel]();
       }
@@ -33,9 +32,6 @@ module.exports = function (baseClass) {
         return callback(null, collection[toTinsel]());
       });
     };
-
-    // Custom-wrap the "collection" method of db objects
-    // const superCollection = db.collection;
 
     // Reintroduce the "db" method of db objects, for talking to a second
     // database via the same connection
