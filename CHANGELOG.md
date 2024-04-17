@@ -1,3 +1,11 @@
+## 1.3.1
+
+* Temporarily reverted to reliance on the official `mongodb` driver version 3.x.
+
+## 1.3.0
+
+* Released version based on `emulate-mongo-3-driver`, causing a temporary regression.
+
 ## 1.2.3
 
 * Fixed issue that caused `count` to disregard its criteria object in at least some cases.
