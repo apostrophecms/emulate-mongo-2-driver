@@ -20,7 +20,23 @@ describe('use mongodb 3 driver in a 2.x style', function() {
 
   it('binary', function(done) {
     try {
-      mongo.Binary(fs.readFileSync('./test/fixtures/a.txt'));
+      const binary = mongo.Binary(fs.readFileSync('./test/fixtures/a.txt'));
+
+      const actual = binary.toString();
+      const expected = 'AAA\n';
+      assert.deepEqual(actual, expected);
+      done();
+    } catch (error) {
+      done(error);
+    }
+  });
+  it('binary with new', function(done) {
+    try {
+      const binary = new mongo.Binary(fs.readFileSync('./test/fixtures/a.txt'));
+
+      const actual = binary.toString();
+      const expected = 'AAA\n';
+      assert.deepEqual(actual, expected);
       done();
     } catch (error) {
       done(error);
