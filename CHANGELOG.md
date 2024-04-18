@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## UNRELEASED
+## 1.3.3
 
 ### Fix
 
