@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## UNRELEASED
+
+### Fix
+
+* Add support for creating `Binary` instances without using `new`.
+
 ## 1.3.2
 
 ### Changes

@@ -1,10 +1,12 @@
 const mongodb = require('@apostrophecms/emulate-mongo-3-driver');
+const binary = require('./binary.js');
 const collection = require('./collection.js');
 const cursor = require('./cursor.js');
 const db = require('./db.js');
 const mongoClient = require('./mongo-client.js');
 
 const emulateClasses = new Map([
+  [ 'Binary', binary ],
   [ 'FindCursor', cursor ],
   [ 'AggregationCursor', cursor ],
   [ 'Collection', collection ],

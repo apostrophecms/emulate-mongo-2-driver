@@ -1,5 +1,6 @@
 const mongo = require('../index.js');
 const assert = require('assert');
+const fs = require('fs');
 
 describe('use mongodb 3 driver in a 2.x style', function() {
   let db;
@@ -14,6 +15,31 @@ describe('use mongodb 3 driver in a 2.x style', function() {
           done();
         });
       });
+    }
+  });
+
+  it('binary', function(done) {
+    try {
+      const binary = mongo.Binary(fs.readFileSync('./test/fixtures/a.txt'));
+
+      const actual = binary.toString();
+      const expected = 'AAA\n';
+      assert.deepEqual(actual, expected);
+      done();
+    } catch (error) {
+      done(error);
+    }
+  });
+  it('binary with new', function(done) {
+    try {
+      const binary = new mongo.Binary(fs.readFileSync('./test/fixtures/a.txt'));
+
+      const actual = binary.toString();
+      const expected = 'AAA\n';
+      assert.deepEqual(actual, expected);
+      done();
+    } catch (error) {
+      done(error);
     }
   });
 
@@ -125,7 +151,10 @@ describe('use mongodb 3 driver in a 2.x style', function() {
     });
   });
   it('updates one without an atomic operator', function(done) {
-    return trees.update({ kind: 'puce' }, { kind: 'truce', leaves: 70 }, function(err, status) {
+    return trees.update({ kind: 'puce' }, {
+      kind: 'truce',
+      leaves: 70
+    }, function(err, status) {
       assert(!err);
       assert(status.result.nModified === 1);
       return trees.findOne({ kind: 'truce' }, function(err, obj) {
@@ -136,19 +165,27 @@ describe('use mongodb 3 driver in a 2.x style', function() {
     });
   });
   it('updates many with an atomic operator', function(done) {
-    return trees.update({ leaves: { $gte: 1 } }, { $set: { age: 50 } }, { multi: true }, function(err, status) {
-      assert(!err);
-      assert(status.result.nModified === 2);
-      return trees.find({}).toArray(function(err, trees) {
+    return trees.update(
+      { leaves: { $gte: 1 } },
+      { $set: { age: 50 } },
+      { multi: true },
+      function(err, status) {
         assert(!err);
-        assert(trees.length > 1);
-        assert(!trees.find(tree => (tree.leaves > 0) && (tree.age !== 50)));
-        done();
-      });
-    });
+        assert(status.result.nModified === 2);
+        return trees.find({}).toArray(function(err, trees) {
+          assert(!err);
+          assert(trees.length > 1);
+          assert(!trees.find(tree => (tree.leaves > 0) && (tree.age !== 50)));
+          done();
+        });
+      }
+    );
   });
   it('updates many without an atomic operator', function(done) {
-    return trees.update({ leaves: { $gte: 1 } }, { leaves: 1, kind: 'boring' }, { multi: true }, function(err, status) {
+    return trees.update({ leaves: { $gte: 1 } }, {
+      leaves: 1,
+      kind: 'boring'
+    }, { multi: true }, function(err, status) {
       assert(!err);
       assert(status.result.nModified === 2);
       return trees.find({}).toArray(function(err, trees) {
@@ -160,12 +197,18 @@ describe('use mongodb 3 driver in a 2.x style', function() {
     });
   });
   it('updates many without an atomic operator, using promises', function() {
-    return trees.update({ leaves: { $gte: 1 } }, { ohmy: true }, { multi: true }).then(function(status) {
-      return trees.find({}).toArray();
-    }).then(function(trees) {
-      assert(trees.length > 1);
-      assert(!trees.find(tree => (tree.ohmy !== true) || tree.leaves));
-    });
+    return trees.update(
+      { leaves: { $gte: 1 } },
+      { ohmy: true },
+      { multi: true }
+    )
+      .then(function(status) {
+        return trees.find({}).toArray();
+      })
+      .then(function(trees) {
+        assert(trees.length > 1);
+        assert(!trees.find(tree => (tree.ohmy !== true) || tree.leaves));
+      });
   });
   it('aggregation query works', function() {
     return trees.aggregate([
@@ -213,7 +256,12 @@ describe('use mongodb 3 driver in a 2.x style', function() {
   it('aggregation with aggregation pipeline with cursor', async function() {
     const cursor = await trees.aggregate([
       { $match: { ohmy: true } },
-      { $group: { _id: null, count: { $sum: 1 } } }
+      {
+        $group: {
+          _id: null,
+          count: { $sum: 1 }
+        }
+      }
     ]);
     const result = await cursor.toArray();
     assert(result);
