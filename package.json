@@ -25,13 +25,12 @@
     "@apostrophecms/emulate-mongo-3-driver": "^1.0.2"
   },
   "devDependencies": {
-    "eslint": "^6.5.1",
-    "eslint-config-apostrophe": "^2.0.2",
-    "eslint-config-standard": "^11.0.0",
+    "eslint": "^8.57.0",
+    "eslint-config-apostrophe": "^4.3.0",
+    "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-node": "^6.0.1",
-    "eslint-plugin-promise": "^3.8.0",
-    "eslint-plugin-standard": "^3.1.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.1.1",
     "mocha": "^6.2.2"
   }
 }

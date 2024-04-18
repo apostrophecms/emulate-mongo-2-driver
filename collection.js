@@ -49,7 +49,10 @@ module.exports = function (baseClass) {
         if ((typeof last) === 'function') {
           // 2.x driver supported passing a callback rather than
           // returning a cursor, 3.x driver does not
-          return super.aggregate(...Array.prototype.slice.call(arguments, 0, arguments.length - 1)).toArray(last);
+          return super.aggregate(
+            ...Array.prototype.slice.call(arguments, 0, arguments.length - 1)
+          )
+            .toArray(last);
         } else {
           // Both 2.x and 3.x return a cursor in the absence of a callback,
           // despite documentation implying you must explicitly ask
@@ -174,7 +177,7 @@ module.exports = function (baseClass) {
           }).then(function() {
             return completeMulti(null, {
               result: {
-                nModified: nModified,
+                nModified,
                 ok: 1
               }
             });
