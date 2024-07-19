@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/apostrophecms/emulate-mongo-2-driver#readme",
   "dependencies": {
-    "@apostrophecms/emulate-mongo-3-driver": "^1.0.5"
+    "@apostrophecms/emulate-mongo-3-driver": "^1.0.6"
   },
   "devDependencies": {
     "eslint": "^8.57.0",

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.3.6
+
+### Changes
+
+* Use `@apostrophecms/emulate-mongo-3-driver` `1.0.6`.
+
 ## 1.3.5
 
 ### Changes
