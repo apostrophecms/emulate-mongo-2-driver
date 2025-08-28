@@ -93,19 +93,48 @@ module.exports = function (baseClass) {
       return this.find(filter, projection);
     }
 
+    // Reimplement findOne in terms of find(), because find() works. findOne broke
+    // here most likely due to a recent update of the mongodb driver, even though it
+    // works fine in meulate-mongo-3-driver alone. A big hint is that
+    // emulate-mongo-3-driver never touches findOne
+
     findOne(criteria, projection, callback) {
+      if ((arguments.length === 1) && ((typeof criteria) === 'function')) {
+        callback = arguments[0];
+        projection = null;
+        criteria = {};
+      } else if (arguments.length === 0) {
+        criteria = {};
+        projection = null;
+        callback = null;
+      }
       if (projection && ((typeof projection) === 'object')) {
         if (callback) {
-          return super.findOne(criteria, projection, callback);
+          // Mustn't return the promise here, mocha gets mad
+          this.find(criteria, projection).limit(1).toArray().then(docs => {
+            return callback(null, docs[0]);
+          }).catch(e => {
+            return callback(e);
+          });
         } else {
-          return super.findOne(criteria, projection);
+          return this.find(criteria, projection).limit(1).toArray().then(docs => {
+            return docs[0];
+          });
         }
       } else {
         callback = projection;
+        projection = null;
         if (callback) {
-          return super.findOne(criteria, callback);
+          // Mustn't return the promise here, mocha gets mad
+          this.find(criteria).limit(1).toArray().then(docs => {
+            return callback(null, docs[0]);
+          }).catch(e => {
+            return callback(e);
+          });
         } else {
-          return super.findOne(criteria);
+          return this.find(criteria).limit(1).toArray().then(docs => {
+            return docs[0];
+          });
         }
       }
     };

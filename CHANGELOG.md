@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.3.7 (2025-08-28)
+
+* Work around a sudden change in the upstream mongodb driver's `findOne` support by reimplementing `findOne()` calls in terms of `find()`.
+
 ## 1.3.6
 
 ### Changes
